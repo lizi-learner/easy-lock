@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>密码锁</title>
+  <style>
+    body {
+      background-color: #ffa066;
+    }
+
+    #wrapper {
+      margin-top: 100px;
+    }
+
+    h2, #container {
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 60px;
+      font-weight: normal;
+    }
+
+    #container {
+      margin: 0 auto;
+      margin-bottom: 50px;
+
+      display: flex;
+      justify-content: space-around;
+      width: 800px;
+      height: 150px;
+    }
+
+    #container input {
+      text-align: center;
+      width: 120px;
+
+      border: none;
+      outline: none;
+      font-size: 70px;
+    }
+
+    #button {
+      width: 300px;
+      height: 90px;
+      text-align: center;
+      line-height: 90px;
+      font-size: 70px;
+      background-color: #ff5f57;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    #button:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper" class="center">
+    <h2>请输入密码：</h2>
+    <div id="container">
+      <input id="box1" type="text">
+      <input id="box2" type="text">
+      <input id="box3" type="text">
+    </div>
+    <div id="button">ENTER
+      <a href="./right.html"></a>
+    </div>
+    
+  </div>
+
+  <script>
+    let type = "orange";
+    const BLUE = "#2972fd";
+    const ORANGE = "#ffa066";
+    let correctpassword = "631";
+
+    let box1 = document.getElementById("box1");
+    let box2 = document.getElementById("box2");
+    let box3 = document.getElementById("box3");
+    let button = document.getElementById("button");
+    //自动聚焦到第一个盒子
+    window.onload = function(){
+      init();
+      box1.focus();
+      
+    }
+    //当前两个盒子内容改变时，切换焦点
+    box1.addEventListener("input", function(){
+      console.log("???")
+      box2.focus();
+    })
+    box2.addEventListener("input", function(){
+      box3.focus();
+    })
+    box3.addEventListener("input", function(){
+      box3.blur();
+    })
+
+    let link = button.querySelector("a");
+    button.addEventListener("click", isCorrect);
+
+    //判断密码是否正确
+    function isCorrect(){
+      
+      let inputpassword = box1.value + box2.value + box3.value;
+
+      if(inputpassword == correctpassword){
+        link.href = `./right.html?color=${type}`
+        
+      }else{
+        link.href = `./wrong.html?color=${type}`;
+      }
+      link.click();
+      
+    }
+
+    //初始渲染函数
+    function init(){
+      let bgColor = window.location.search.split("=")[1];
+      if(bgColor == "blue"){
+        document.body.style.background = "#2972fd"
+        type = "blue";
+        correctpassword = "742";
+      }
+    }
+
+    
+    
+  </script>
+</body>
+</html>

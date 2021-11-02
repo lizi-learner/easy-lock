@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      --orange: #ffa066;
+      --blue: #2972fd;
+    }
+
+    body {
+      background-color: var(--orange);
+    }
+
+    #info {
+      margin: 0 auto;
+      margin-top: 50px;
+      width: 60vw;
+      text-align: center;
+      font-size: 70px;
+      background-color: #ff5f57;
+    }
+
+    img {
+      display: block;
+      width: 400px;
+      margin: 0 auto;
+	  margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">输入错误！</br>请重试！</div>
+  <img src="./wrong.png" alt="">
+  
+  <script>
+    const BLUE = "#2972fd";
+    const ORANGE = "#ffa066";
+
+    init();
+
+    function init(){
+      let bgColor = window.location.search.split("=")[1];
+      if(bgColor == "blue"){
+        document.body.style.background = BLUE;
+      }
+    }
+	</script>
+</body>
+</html>

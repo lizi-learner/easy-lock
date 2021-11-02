@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      --orange: #ffa066;
+      --blue: #2972fd;
+    }
+
+    body {
+      background-color: var(--orange);
+      text-align: center;
+    }
+
+    #info {
+      margin: 0 auto;
+      margin-top: 50px;
+      width: 60vw;
+      text-align: center;
+      font-size: 70px;
+      background-color: #ff5f57;
+    }
+
+    img {
+      display: block;
+      width: 400px;
+      margin: 0 auto;
+	    margin-top: 50px;
+    }
+
+    video {
+      width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">密码正确！</br>太棒啦！</div>
+  <!-- <img src="./imgs/1.png" alt=""> -->
+  <a href="./index.html"></a>
+  
+	<script>
+    const BLUE = "#2972fd";
+    const ORANGE = "#ffa066";
+		
+    let type = window.location.search;
+    type = type.split("=")[1];
+
+    init();
+
+    function init(){
+      //判断背景颜色，如果是蓝色则换成视频，否则是图片
+      if(type == "blue"){
+        document.body.style.background = BLUE;
+        let video = document.createElement('video');
+        video.src = "./video.mp4";
+        video.controls = true;
+        video.style.width = "700px";
+        video.style.marginTop = "20px";
+        document.body.append(video)
+      }else{
+        let img = document.createElement('img');
+        let cnt = 1;
+
+        let changeImg = function(){
+          console.log(cnt)
+          img.src = "./imgs/" + ++cnt + ".png";
+        }
+
+        img.src = "./imgs/" + cnt + ".png";
+        document.body.append(img);
+        img.addEventListener('click', changeImg);
+
+        img.onerror = function(){
+          //发生错误时显示下一个按钮
+          console.log("???")
+          if(type == "blue"){
+            //显示图片并移除事件并修改背景颜色
+            img.src = "./imgs/" + --cnt + ".png";
+            img.removeEventListener("click", changeImg);
+          } else {
+            //切换颜色
+            let link = document.querySelector('a');
+            link.href = "./index.html?color=blue";
+            link.click();
+          }
+        }
+      }
+    }
+
+
+	  </script>
+</body>
+</html>
